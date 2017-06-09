@@ -4,7 +4,7 @@ const express=require('express');
 const http=require('http');
 const socketIO=require('socket.io');
 var app=express();
-const {generateMessage}=require('./utils/message');
+const {generateMessage,generateLocationMessage}=require('./utils/message');
 var publicPath=path.join(__dirname,"../public");
 app.use(express.static(publicPath));
 const port=process.env.PORT || 3000;
@@ -22,15 +22,12 @@ io.on('connection',(socket)=>{
         io.emit('newMessage',generateMessage(message.from,message.text)); 
         callback('This is from Server');
     });
-        // socket.broadcast.emit('newMessage',{
-        //     from:message.from,
-        //     text:message.text,
-        //     createdAt: new Date().getTime()
-        // });
-        //console.log(message);
-    //});
-    
+    socket.on('createLocationMessage',(coords)=>{
+        io.emit('newLocationMessage',generateLocationMessage('user',coords))
+    },()=>{
 
+    });
+        
 });
 server.listen(port,()=>{
     console.log(`server listening on port ${port}`);
