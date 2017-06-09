@@ -6,14 +6,8 @@
     <body>
         <p>Welcome to SCT Chat App</p>
         <script src='/socket.io/socket.io.js'></script>
-        <script>
-            var socket=io();
-            socket.on('connect',()=>{
-                console.log('Connected to Server');
-            })
-            socket.on('disconnect',()=>{
-                console.log("Disconnected from Server");
-            })
+        <script src='/js/index.js'>
+           
         </script>
     </body>
 </html>

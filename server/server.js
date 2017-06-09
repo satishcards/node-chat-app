@@ -16,6 +16,11 @@ io.on('connection',(socket)=>{
     socket.on('disconnect',()=>{
         console.log("Client Disconnected");
     })
+    socket.on('createMessage',(message)=>{
+        io.emit('newMessage',message);
+        console.log(message);
+    });
+    
 
 })
 server.listen(port,()=>{
