@@ -17,7 +17,10 @@ class Users{
         return user;
     }
     getUser(id){
-        return this.users.filter((user)=>user.id===id)[0];
+        return this.users.filter((user)=>user.id===id )[0];
+    }
+    getUserName(room,name){
+        return this.users.filter((user)=>user.name===name && user.room===room)[0];
     }
     getUserList(room){
         // var users=this.users.filter((user)=>{

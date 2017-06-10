@@ -28,7 +28,7 @@ socket.on('connect',function(){
             console.log('No Error');
         }
     });
-    socket.emit('newEmail',{to:'satish',text:'Hey'});
+   // socket.emit('newEmail',{to:'satish',text:'Hey'});
 })
 socket.on('disconnect',function(){
     console.log("Disconnected from Server");

@@ -22,6 +22,17 @@ io.on('connection',(socket)=>{
         {
             callback('Name and Room are required');
         }
+        var name=params.name;
+        params.room=params.room.toLowerCase();
+        
+        var user=users.getUserName(params.room,params.name);
+       // console.log(user);
+       // console.log(Object.keys(userfiltered).length);
+        if( user)
+        {
+            callback('Select different Name');
+        }
+        
         socket.join(params.room);
         users.removeUser(socket.id);
         users.addUser(socket.id,params.name,params.room);
