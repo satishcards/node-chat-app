@@ -1,3 +1,5 @@
+ //var moment =require('moment');
+ //var moment=require('moment');
  var socket=io();
 
 socket.on('connect',function(){
@@ -8,14 +10,16 @@ socket.on('disconnect',function(){
     console.log("Disconnected from Server");
 });
 socket.on('newMessage',function(message){
+    var formattedTime=moment(message.createdAt).format('h:mm a');
     console.log('New Message',message);
     var li=jQuery('<li></li');
-    li.text(`${message.from}: ${message.text}`);
+    li.text(`${message.from} ${formattedTime}: ${message.text}`);
     jQuery('#messages').append(li);
 });
 socket.on('newLocationMessage',function(message){
+    var formattedTime=moment(message.createdAt).format('h:mm a');
     var li=jQuery('<li></li>');
-    li.text(`${message.from}: ` );
+    li.text(`${message.from} ${formattedTime} :` );
     var a=jQuery('<a target=_blank>My Current Location</a>');
     a.attr('href',message.url);
     li.append(a);
