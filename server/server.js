@@ -42,11 +42,19 @@ io.on('connection',(socket)=>{
     
     socket.on('createMessage',(message,callback)=>{
         var user=users.getUser(socket.id);
-        io.emit('newMessage',generateMessage(user.name,message.text)); 
-        callback('This is from Server');
+        // console.log(message.text);
+        if(user && isRealString(message.text)){
+            io.to(user.room).emit('newMessage',generateMessage(user.name,message.text)); 
+            callback('This is from Server');
+        }
+        
     });
     socket.on('createLocationMessage',(coords)=>{
-        io.emit('newLocationMessage',generateLocationMessage('user',coords))
+        var user=users.getUser(socket.id);
+        if(user){
+            io.to(user.room).emit('newLocationMessage',generateLocationMessage(user.name,coords));    
+        }
+        
     });
         
 });
