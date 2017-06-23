@@ -4,7 +4,11 @@ const express=require('express');
 const http=require('http');
 const socketIO=require('socket.io');
 var app=express();
-const {generateMessage,generateLocationMessage}=require('./utils/message');
+var message=require('./utils/message');
+var generateMessage=message.generateMessage;
+//var {generateMessage}=require('./utils/message');
+var {generateLocationMessage}=require('./utils/message');
+
 const {isRealString}=require('./utils/validation');
 const {Users}=require('./utils/users');
 var publicPath=path.join(__dirname,"../public");
